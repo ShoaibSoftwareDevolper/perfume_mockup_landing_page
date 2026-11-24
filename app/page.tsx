@@ -1,69 +1,88 @@
-import Image from "next/image";
+import { ArrowRight } from "lucide-react";
+import CollectionFeature from "@/components/CollectionFeature";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
+import JournalSection from "@/components/JournalSection";
+import Overlays from "@/components/Overlays";
+import ProductGrid from "@/components/ProductGrid";
+import ScrollReveal from "@/components/ScrollReveal";
+import SmoothScroll from "@/components/SmoothScroll";
+import StoreProvider from "@/components/StoreProvider";
+import { assets } from "@/data/assets";
+import { objectProducts, signatureProducts } from "@/data/products";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <StoreProvider>
+      <SmoothScroll />
+      <ScrollReveal />
+      <div id="top" className="relative">
+        <Header />
+        <main>
+          <Hero />
+
+          <section id="shop" aria-labelledby="shop-title" className="wrap mt-[var(--section-tight)] scroll-mt-6">
+            <h2 id="shop-title" data-reveal="heading" className="eyebrow mb-[var(--heading-gap)] text-center">
+              MAISON SÉLUNE — An Independent French Fragrance House
+            </h2>
+            <ProductGrid products={signatureProducts} />
+            <p className="mt-[clamp(24px,2.6vw,40px)] text-center">
+              <a href="#objects" className="text-link">
+                Shop All <ArrowRight size={12} strokeWidth={1.4} aria-hidden />
+              </a>
+            </p>
+          </section>
+
+          <CollectionFeature
+            id="heritage"
+            title="The Sable Collection"
+            description="A study in warmth and restraint. Quietly composed fragrances inspired by light, texture and the passing of time."
+            href="#shop"
+            product={{ src: assets.sableStillLife, alt: "A frosted MAISON SÉLUNE bottle on a stone plinth against a white arch" }}
+            campaign={{
+              src: assets.linenPortrait,
+              alt: "A man in a linen shirt leaning on a stone wall, holding a MAISON SÉLUNE bottle",
+            }}
+          />
+
+          <section id="objects" aria-labelledby="objects-title" className="wrap mt-[var(--section)] scroll-mt-6">
+            <h2 id="objects-title" data-reveal="heading" className="eyebrow mb-[var(--heading-gap)] text-center">
+              Objects of Scent
+            </h2>
+            <ProductGrid products={objectProducts} />
+          </section>
+
+          <section aria-labelledby="journal-title" className="wrap mt-[var(--section)] text-center">
+            <h2
+              id="journal-title"
+              data-reveal="heading"
+              className="font-display text-[clamp(30px,4.6vw,72px)] font-medium uppercase leading-[1] tracking-[-0.01em]"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+              The Sélune Journal
+            </h2>
+            <p data-reveal="heading" className="mt-[clamp(10px,1.2vw,16px)] text-[13px] font-medium md:text-[14px]">
+              Notes on fragrance, craft, and the art of presence.
+            </p>
+          </section>
+
+          <JournalSection />
+
+          <CollectionFeature
+            id="signature"
+            title="Nocturne — The Signature"
+            description="An intimate composition of shadow, warmth and quiet intensity."
+            href="#shop"
+            product={{ src: assets.nocturneCloseUp, alt: "A frosted MAISON SÉLUNE bottle in raking afternoon light on stone" }}
+            campaign={{
+              src: assets.signatureCampaign,
+              alt: "A man seated on a stone ledge beside a MAISON SÉLUNE bottle",
+            }}
+          />
+        </main>
+        <Footer />
+      </div>
+      <Overlays />
+    </StoreProvider>
   );
 }
